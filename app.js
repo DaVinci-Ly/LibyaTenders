@@ -450,7 +450,10 @@ function render() {
         </div>
       </div>
       ${t.entity ? `<div class="card-entity">${ICONS.building} ${hl(t.entity, hits)}</div>` : ''}
-      ${t.description ? `<div class="card-desc">${hl(t.description, hits)}</div>` : ''}
+      ${t.description ? `<div class="card-desc">
+        <div class="desc-text">${hl(t.description, hits)}</div>
+        <button class="read-more-btn" style="display: none;" onclick="toggleDesc(this)">إظهار المزيد</button>
+      </div>` : ''}
       <div class="card-meta">
         ${t.biddingNumber ? `<span>${ICONS.hash} ${t.biddingNumber}</span>` : ''}
         ${t.publishDate ? `<span>${ICONS.calendar} نُشر: ${t.publishDate}</span>` : ''}
@@ -458,9 +461,21 @@ function render() {
         ${t.location ? `<span>${ICONS.mapPin} ${t.location}</span>` : ''}
         ${t.documentPrice ? `<span>${ICONS.tag} ${t.documentPrice} د.ل</span>` : ''}
       </div>
-      ${t.url ? `<a class="link-btn" href="${t.url}" target="_blank" rel="noopener">فتح على الموقع الرسمي ${ICONS.arrowUpRight}</a>` : ''}
+      ${t.url ? `<a class="link-btn" href="${t.url}" target="_blank" rel="noopener">عرض التفاصيل ${ICONS.arrowUpRight}</a>` : ''}
     </div>`;
   }).join('');
+
+  // Check for text overflow to show "Read more" buttons
+  setTimeout(() => {
+    document.querySelectorAll('.desc-text').forEach(el => {
+      if (el.scrollHeight > el.clientHeight) {
+        const btn = el.nextElementSibling;
+        if (btn && btn.classList.contains('read-more-btn')) {
+          btn.style.display = 'inline-block';
+        }
+      }
+    });
+  }, 10);
 }
 
 function isOpen(t) {
@@ -514,6 +529,17 @@ function showError(msg) {
   const el = document.getElementById('errBox');
   el.style.display = 'block';
   el.textContent = msg;
+}
+
+function toggleDesc(btn) {
+  const el = btn.previousElementSibling;
+  if (el.classList.contains('expanded')) {
+    el.classList.remove('expanded');
+    btn.textContent = 'إظهار المزيد';
+  } else {
+    el.classList.add('expanded');
+    btn.textContent = 'إظهار أقل';
+  }
 }
 
 
