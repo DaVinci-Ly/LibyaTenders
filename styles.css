@@ -137,13 +137,10 @@ header {
 }
 
 .badge {
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  padding: 4px 14px;
   font-size: 11px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   white-space: nowrap;
+  opacity: 0.8;
 }
 
 
@@ -760,9 +757,22 @@ select:focus {
   }
 
   header {
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 10px 16px;
+    flex-wrap: nowrap;
+    gap: 6px;
+    padding: 10px 12px;
+  }
+
+  .logo h1 {
+    font-size: 13px;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .badge {
+    font-size: 10px;
   }
 
   .card-top {

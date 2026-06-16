@@ -236,7 +236,7 @@ async function fetchTenders() {
     }));
 
     document.getElementById('lastUpdate').textContent =
-      'آخر تحديث: ' + new Date().toLocaleTimeString('ar-LY');
+      'مُحدّث: ' + new Date().toLocaleTimeString('ar-LY', { hour: '2-digit', minute: '2-digit' });
 
     setStatus('green', `تم جلب ${tenders.length} عطاء`);
     updateStats();
