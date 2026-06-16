@@ -134,6 +134,21 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if path == "/" or path == "/index.html":
             self.serve_file("index.html", "text/html; charset=utf-8")
 
+        elif path.startswith("/assets/"):
+            rel_path = path.lstrip("/")
+            content_type = "application/octet-stream"
+            if path.endswith(".svg"):
+                content_type = "image/svg+xml"
+            elif path.endswith(".png"):
+                content_type = "image/png"
+            elif path.endswith(".jpg") or path.endswith(".jpeg"):
+                content_type = "image/jpeg"
+            elif path.endswith(".css"):
+                content_type = "text/css"
+            elif path.endswith(".js"):
+                content_type = "application/javascript"
+            self.serve_file(rel_path, content_type)
+
         elif path == "/api/tenders":
             self.send_response(200)
             self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -182,7 +197,18 @@ def main():
     print(f"  🌐 سيفتح المتصفح تلقائيًا...")
     print(f"  ⏹  اضغط Ctrl+C للإيقاف\n")
 
-    threading.Timer(1.2, lambda: webbrowser.open(url)).start()
+    def open_browser():
+        try:
+            import subprocess
+            subprocess.Popen(['open', '-a', 'Google Chrome', url], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        except Exception:
+            try:
+                chrome = webbrowser.get('chrome')
+                chrome.open(url)
+            except Exception:
+                webbrowser.open(url)
+
+    threading.Timer(1.2, open_browser).start()
 
     try:
         server.serve_forever()
