@@ -134,6 +134,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if path == "/" or path == "/index.html":
             self.serve_file("index.html", "text/html; charset=utf-8")
 
+        elif path == "/styles.css":
+            self.serve_file("styles.css", "text/css; charset=utf-8")
+
+        elif path == "/app.js":
+            self.serve_file("app.js", "application/javascript; charset=utf-8")
+
         elif path.startswith("/assets/"):
             rel_path = path.lstrip("/")
             content_type = "application/octet-stream"

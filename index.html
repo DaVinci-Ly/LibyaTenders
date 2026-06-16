@@ -1,202 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>متتبع العطاءات الحكومية الليبية</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap');
-
-:root {
-  --bg: #0d1117; --surface: #161b22; --surface2: #21262d;
-  --border: #30363d; --accent: #f0a500; --accent2: #e05c1a;
-  --text: #e6edf3; --muted: #8b949e; --green: #3fb950;
-  --red: #f85149; --blue: #58a6ff; --purple: #bc8cff;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; min-height: 100vh; }
-
-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 24px;
-  display: flex; align-items: center; justify-content: space-between;
-  position: sticky; top: 0; z-index: 100;
-}
-.logo { display: flex; align-items: center; gap: 12px; }
-.logo-icon {
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-}
-.logo-icon img {
-  width: 100%; height: 100%;
-  object-fit: contain;
-}
-.logo h1 { font-size: 17px; font-weight: 700; }
-.logo span { font-size: 11px; color: var(--muted); display: block; }
-.badge {
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--muted);
-}
-
-.container { max-width: 1060px; margin: 0 auto; padding: 20px; }
-
-.panel {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 12px; padding: 20px; margin-bottom: 18px;
-}
-.panel-title { font-size: 12px; color: var(--muted); font-weight: 700;
-  letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
-
-.chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; }
-.chip {
-  display: flex; align-items: center; gap: 5px;
-  background: rgba(240,165,0,0.12); border: 1px solid rgba(240,165,0,0.35);
-  border-radius: 20px; padding: 3px 11px; font-size: 13px; color: var(--accent);
-  cursor: pointer; transition: background 0.15s;
-}
-.chip:hover { background: rgba(240,165,0,0.22); }
-.chip .x { font-size: 15px; opacity: 0.6; margin-right: -2px; }
-
-.row { display: flex; gap: 8px; }
-input[type=text] {
-  flex: 1; background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 8px; padding: 9px 13px; color: var(--text);
-  font-family: 'Cairo', sans-serif; font-size: 13px; outline: none;
-}
-input[type=text]:focus { border-color: var(--accent); }
-input::placeholder { color: var(--muted); }
-
-.action-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
-  margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
-
-button {
-  background: var(--accent); color: #000; border: none;
-  border-radius: 8px; padding: 9px 18px;
-  font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700;
-  cursor: pointer; transition: background 0.15s; white-space: nowrap;
-}
-button:hover { background: #d99200; }
-button:disabled { opacity: 0.45; cursor: not-allowed; }
-.btn2 { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
-.btn2:hover { background: var(--border); }
-
-.prog { height: 3px; background: var(--surface2); border-radius: 2px;
-  margin-top: 10px; overflow: hidden; display: none; }
-.prog-fill {
-  height: 100%; width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  transition: width 0.4s; border-radius: 2px;
-}
-
-.status-bar {
-  display: flex; align-items: center; gap: 10px;
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 9px; padding: 10px 14px; margin-bottom: 16px; font-size: 13px;
-}
-.dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
-.dot.green { background: var(--green); animation: pulse 1.5s infinite; }
-.dot.orange { background: var(--accent); animation: pulse 1.2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-
-.stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 18px; }
-.stat { background: var(--surface); border: 1px solid var(--border);
-  border-radius: 10px; padding: 14px; text-align: center; }
-.stat .n { font-size: 26px; font-weight: 900; color: var(--accent); }
-.stat .l { font-size: 11px; color: var(--muted); margin-top: 3px; }
-
-/* ── Category tabs ── */
-.cat-tabs {
-  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;
-}
-.cat-tab {
-  display: flex; align-items: center; gap: 5px;
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 20px; padding: 5px 13px; font-size: 12px; cursor: pointer;
-  transition: all 0.15s; white-space: nowrap; color: var(--muted);
-}
-.cat-tab:hover { border-color: var(--accent); color: var(--text); }
-.cat-tab.active { background: rgba(240,165,0,0.15); border-color: var(--accent); color: var(--accent); font-weight: 700; }
-.cat-tab .cat-count {
-  background: var(--surface); border-radius: 10px;
-  padding: 1px 6px; font-size: 10px; margin-right: 2px;
-}
-.cat-tab.active .cat-count { background: rgba(240,165,0,0.2); }
-
-/* tech highlight */
-.cat-tab[data-cat="تقنية"].active { background: rgba(88,166,255,0.15); border-color: var(--blue); color: var(--blue); }
-.cat-tab[data-cat="تقنية"].active .cat-count { background: rgba(88,166,255,0.2); }
-
-.filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
-.filters span { font-size: 12px; color: var(--muted); }
-select {
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 7px; padding: 7px 11px; color: var(--text);
-  font-family: 'Cairo', sans-serif; font-size: 12px; outline: none; cursor: pointer;
-}
-select:focus { border-color: var(--accent); }
-
-.sec-title {
-  font-size: 11px; color: var(--muted); font-weight: 700;
-  letter-spacing: 1px; margin-bottom: 10px;
-  display: flex; align-items: center; gap: 8px;
-}
-.sec-title::after { content:''; flex:1; height:1px; background: var(--border); }
-
-.grid { display: flex; flex-direction: column; gap: 10px; }
-.card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 11px; padding: 16px;
-  transition: border-color 0.2s, transform 0.15s;
-}
-.card:hover { border-color: rgba(240,165,0,0.4); transform: translateY(-1px); }
-.card.hit { border-right: 3px solid var(--green); }
-.card.tech { border-right: 3px solid var(--blue); }
-.card.hit.tech { border-right: 3px solid var(--purple); }
-
-.card-top { display: flex; justify-content: space-between;
-  align-items: flex-start; gap: 10px; margin-bottom: 8px; }
-.card-title { font-size: 14px; font-weight: 700; line-height: 1.55; flex: 1; }
-
-.tags { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
-.tag { border-radius: 5px; padding: 2px 9px; font-size: 11px; font-weight: 600; white-space: nowrap; }
-.tag.m  { background: rgba(63,185,80,.15);  color: var(--green);  border:1px solid rgba(63,185,80,.3); }
-.tag.e  { background: rgba(88,166,255,.13); color: var(--blue);   border:1px solid rgba(88,166,255,.3); }
-.tag.o  { background: rgba(63,185,80,.13);  color: var(--green);  border:1px solid rgba(63,185,80,.3); }
-.tag.c  { background: rgba(248,81,73,.13);  color: var(--red);    border:1px solid rgba(248,81,73,.3); }
-.tag.cat{ background: rgba(188,140,255,.12);color: var(--purple); border:1px solid rgba(188,140,255,.3); }
-.tag.tech-tag { background: rgba(88,166,255,.18); color: var(--blue); border:1px solid rgba(88,166,255,.4); font-weight: 700; }
-
-.card-desc { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.6; }
-.card-meta { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px;
-  color: var(--muted); margin-top: 7px; }
-.hl { background: rgba(240,165,0,.22); color: var(--accent); border-radius: 3px; padding: 0 2px; }
-.link-btn {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 12px; color: #000; background: var(--accent);
-  border-radius: 6px; padding: 5px 13px; margin-top: 9px;
-  text-decoration: none; font-weight: 700; font-family: 'Cairo', sans-serif;
-  transition: background 0.15s;
-}
-.link-btn:hover { background: #d99200; }
-
-.empty { text-align: center; padding: 50px 20px; color: var(--muted); }
-.empty .ico { font-size: 44px; margin-bottom: 10px; }
-.empty h3 { font-size: 15px; color: var(--text); margin-bottom: 5px; }
-.empty p { font-size: 13px; }
-
-.err {
-  background: rgba(248,81,73,.1); border: 1px solid rgba(248,81,73,.3);
-  border-radius: 8px; padding: 12px 14px; color: var(--red);
-  font-size: 13px; margin-bottom: 14px; white-space: pre-wrap; display: none;
-}
-
-@media(max-width:620px) {
-  .stats { grid-template-columns: 1fr 1fr; }
-  header { flex-wrap: wrap; gap: 8px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="منصة رصد وتتبع العطاءات الحكومية الليبية — ابحث وصنّف العطاءات حسب اهتماماتك">
+  <title>متتبع العطاءات الحكومية الليبية</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -207,429 +16,96 @@ select:focus { border-color: var(--accent); }
     </div>
     <div>
       <h1>متتبع العطاءات الحكومية</h1>
-      <span>منصة عطاءت — ليبيا</span>
+      <span>منصة العطاءات — ليبيا</span>
     </div>
   </div>
-  <div class="badge" id="lastUpdate">لم يتم الجلب بعد</div>
+  <div class="header-actions">
+    <div class="badge" id="lastUpdate">لم يتم التحديث</div>
+    <button class="theme-toggle" id="themeToggle" aria-label="تبديل المظهر" onclick="toggleTheme()">
+      <!-- Icon will be injected by JS -->
+    </button>
+  </div>
 </header>
 
-<div class="container">
+<main class="container">
 
-  <div class="panel">
-    <div class="panel-title">⚙️ الكلمات المفتاحية — العطاءات التي تهمني</div>
+  <!-- Keywords Panel -->
+  <section class="panel" aria-label="الكلمات المفتاحية">
+    <h2 class="panel-title">الكلمات المفتاحية</h2>
     <div class="chips" id="chips"></div>
-    <div class="row">
-      <input type="text" id="kwIn" placeholder="مثال: شبكة، برمجيات، طرق، كهرباء..." />
-      <button onclick="addKw()">+ إضافة</button>
+    <div class="input-row">
+      <input type="text" id="kwIn" placeholder="مثال: شبكة، برمجيات، طرق، كهرباء..." aria-label="إضافة كلمة مفتاحية">
+      <button onclick="addKw()">إضافة</button>
     </div>
     <div class="action-row">
-      <button id="fetchBtn" onclick="fetchTenders()">🔍 جلب العطاءات الآن</button>
-      <button class="btn2" onclick="clear_()">🗑️ مسح</button>
+      <div class="btn-group">
+        <button id="fetchBtn" onclick="fetchTenders()">جلب العطاءات</button>
+        <button class="btn-secondary" onclick="clearAll()">مسح الكل</button>
+      </div>
+      <!-- Status -->
+      <div class="status-bar" role="status" aria-live="polite">
+        <span class="status-dot" id="dot"></span>
+        <span id="statusTxt">أدخل كلماتك المفتاحية ثم اضغط "جلب العطاءات"</span>
+      </div>
     </div>
-    <div class="prog" id="prog"><div class="prog-fill" id="progFill"></div></div>
+    <div class="progress" id="prog"><div class="progress-fill" id="progFill"></div></div>
+  </section>
+
+  <!-- Error -->
+  <div class="error-box" id="errBox" role="alert"></div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-value" id="sTotal">—</span>
+      <span class="stat-label">إجمالي العطاءات</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value green" id="sMatch">—</span>
+      <span class="stat-label">تطابق مع اهتماماتك</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value blue" id="sTech">—</span>
+      <span class="stat-label">عطاءات تقنية</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value" id="sOpen">—</span>
+      <span class="stat-label">مفتوحة حالياً</span>
+    </div>
   </div>
 
-  <div class="status-bar">
-    <div class="dot" id="dot"></div>
-    <span id="statusTxt">أدخل كلماتك المفتاحية ثم اضغط "جلب العطاءات"</span>
+  <!-- Category Tabs -->
+  <nav class="category-tabs" id="catTabs" aria-label="تصنيفات العطاءات"></nav>
+
+  <!-- Results Header & Filters -->
+  <div class="results-header">
+    <div class="section-title" id="secTitle">نتائج العطاءات</div>
+    <div class="filters-bar">
+      <label for="filt">عرض:</label>
+      <select id="filt" onchange="render()">
+        <option value="all">جميع العطاءات</option>
+        <option value="match">المطابقة فقط</option>
+        <option value="open">المفتوحة فقط</option>
+      </select>
+      <select id="sort" onchange="render()" aria-label="ترتيب النتائج">
+        <option value="match">الأكثر تطابقاً</option>
+        <option value="date">الأحدث أولاً</option>
+        <option value="alpha">أبجدي</option>
+      </select>
+    </div>
   </div>
-
-  <div class="err" id="errBox"></div>
-
-  <div class="stats">
-    <div class="stat"><div class="n" id="sTotal">—</div><div class="l">إجمالي العطاءات</div></div>
-    <div class="stat"><div class="n" id="sMatch" style="color:var(--green)">—</div><div class="l">تطابق مع اهتماماتك</div></div>
-    <div class="stat"><div class="n" id="sTech" style="color:var(--blue)">—</div><div class="l">عطاءات تقنية</div></div>
-    <div class="stat"><div class="n" id="sOpen" style="color:var(--accent)">—</div><div class="l">مفتوحة حالياً</div></div>
-  </div>
-
-  <!-- Category tabs -->
-  <div class="cat-tabs" id="catTabs"></div>
-
-  <!-- Filters -->
-  <div class="filters">
-    <span>عرض:</span>
-    <select id="filt" onchange="render()">
-      <option value="all">جميع العطاءات</option>
-      <option value="match">المطابقة فقط</option>
-      <option value="open">المفتوحة فقط</option>
-    </select>
-    <select id="sort" onchange="render()">
-      <option value="match">الأكثر تطابقًا أولاً</option>
-      <option value="date">الأحدث أولاً</option>
-      <option value="alpha">أبجدي</option>
-    </select>
-  </div>
-
-  <div class="sec-title" id="secTitle">نتائج العطاءات</div>
-  <div class="grid" id="grid">
-    <div class="empty"><div class="ico">🏛️</div><h3>في انتظار الجلب</h3><p>أضف كلماتك المفتاحية واضغط جلب</p></div>
-  </div>
-
-</div>
-
-<script>
-// ── التصنيف الذكي ──
-const CATS = [
-  {
-    key: 'تقنية',
-    icon: '💻',
-    color: 'var(--blue)',
-    kw: [
-      'حاسوب','حاسبات','كمبيوتر','لابتوب','طابعة','ماسح','سكانر',
-      'برمجيات','برنامج','تطبيق','موقع','منصة','نظام معلومات',
-      'شبكة','إنترنت','wifi','راوتر','سويتش','كابل',
-      'خادم','سيرفر','تخزين','سحابة','cloud',
-      'كاميرا مراقبة','cctv','نظام مراقبة','تحكم',
-      'اتصالات','هاتف','جوال','مقسم','هواتف',
-      'أمن معلومات','سيبراني','جدار ناري','firewall',
-      'طباعة','تصوير وثائق','آلة تصوير',
-      'تقنية','تكنولوجيا','رقمي','ذكاء اصطناعي',
-      'it','ict','software','hardware','server','network','digital'
-    ]
-  },
-  {
-    key: 'إنشاء وبناء',
-    icon: '🏗️',
-    color: 'var(--accent)',
-    kw: [
-      'إنشاء','بناء','تشييد','ترميم','تشطيب','هدم','حفريات',
-      'مبنى','مبانى','منشأة','قاعة','مكتب','مخزن','ورشة',
-      'طريق','رصيف','ساحة','ميدان','جسر','نفق','ممر',
-      'خرسانة','حديد','بلاط','رخام','أسفلت','طارمة',
-      'أرضيات','جدران','سقف','تسقيف','عزل','دهان','صباغة',
-      'نجارة','ألومنيوم','زجاج','أبواب','نوافذ','حديد حماية'
-    ]
-  },
-  {
-    key: 'كهرباء وطاقة',
-    icon: '⚡',
-    color: '#f0c040',
-    kw: [
-      'كهرباء','كهربائي','كهربائية','أعمال كهربائية',
-      'طاقة','محطة كهرباء','مولد','مولدات','جنريتور',
-      'أسلاك','كابلات كهرباء','لوحة كهربائية','محول',
-      'إنارة','إضاءة','led','طاقة شمسية','ألواح شمسية'
-    ]
-  },
-  {
-    key: 'مياه وصرف صحي',
-    icon: '💧',
-    color: '#40b0f0',
-    kw: [
-      'مياه','ماء','صرف صحي','أنابيب مياه','شبكة مياه',
-      'حفر','بئر','آبار','ضخ مياه','خزان مياه',
-      'قناة','مجاري','صرف','صرف مياه','معالجة مياه'
-    ]
-  },
-  {
-    key: 'طبي وصحة',
-    icon: '🏥',
-    color: '#40d080',
-    kw: [
-      'طبي','طبية','مستشفى','عيادة','صحة','صحي',
-      'دواء','أدوية','مستلزمات طبية','معدات طبية',
-      'أجهزة طبية','جراحي','تمريض','مختبر','أشعة',
-      'صيدلية','مستحضرات','لقاح','لقاحات'
-    ]
-  },
-  {
-    key: 'مركبات ونقل',
-    icon: '🚗',
-    color: '#e0a040',
-    kw: [
-      'سيارة','سيارات','مركبة','مركبات','شاحنة','شاحنات',
-      'حافلة','حافلات','دراجة','قارب','سفينة',
-      'وقود','بنزين','ديزل','زيت محرك','إطارات','قطع غيار'
-    ]
-  },
-  {
-    key: 'أثاث ومستلزمات',
-    icon: '🪑',
-    color: '#c08050',
-    kw: [
-      'أثاث','كراسي','طاولات','خزائن','مقاعد',
-      'مكتبي','مستلزمات مكتبية','قرطاسية','أوراق','أقلام',
-      'مفروشات','ستائر','سجاد','مراتب','وسائد'
-    ]
-  },
-  {
-    key: 'تنظيف وخدمات',
-    icon: '🧹',
-    color: '#90c090',
-    kw: [
-      'نظافة','تنظيف','مواد تنظيف','خدمات نظافة',
-      'حراسة','أمن','حارس','مراقبة أمنية',
-      'بستنة','تشجير','خدمات','تموين','وجبات','مطعم','طعام'
-    ]
-  },
-];
-
-// ── State ──
-let kws = JSON.parse(localStorage.getItem('tKws') || '["صرف صحي","مياه","حفر"]');
-let tenders = [];
-let activeCat = 'الكل';
-
-// ── تصنيف العطاء ──
-function classifyTender(t) {
-  const txt = (t.title + ' ' + t.description + ' ' + (t.category||'')).toLowerCase();
-  for (const cat of CATS) {
-    if (cat.kw.some(k => txt.includes(k.toLowerCase()))) return cat.key;
-  }
-  return 'غير مصنف';
-}
-
-// ── Keywords ──
-const saveKws = () => localStorage.setItem('tKws', JSON.stringify(kws));
-
-function renderChips() {
-  document.getElementById('chips').innerHTML = kws.map((k, i) =>
-    `<div class="chip" onclick="rmKw(${i})">${k} <span class="x">×</span></div>`
-  ).join('');
-}
-
-function addKw() {
-  const inp = document.getElementById('kwIn');
-  const v = inp.value.trim();
-  if (v && !kws.includes(v)) { kws.push(v); saveKws(); renderChips(); if (tenders.length) { updateStats(); render(); } }
-  inp.value = ''; inp.focus();
-}
-
-function rmKw(i) { kws.splice(i,1); saveKws(); renderChips(); if (tenders.length) { updateStats(); render(); } }
-
-document.getElementById('kwIn').addEventListener('keydown', e => { if (e.key==='Enter') addKw(); });
-
-// ── Fetch ──
-async function fetchTenders() {
-  const btn = document.getElementById('fetchBtn');
-  btn.disabled = true;
-  setStatus('orange', 'جارٍ جلب العطاءات من المنصة الرسمية...');
-  setProgress(15);
-  hide('errBox');
-
-  try {
-    setProgress(35);
-    const res = await fetch('http://127.0.0.1:7845/api/tenders');
-    setProgress(75);
-
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    setProgress(92);
-
-    if (data.error && (!data.tenders || data.tenders.length === 0)) {
-      throw new Error(data.error);
-    }
-
-    // تصنيف العطاءات تلقائياً
-    tenders = (data.tenders || []).map(t => ({
-      ...t,
-      autoCategory: classifyTender(t)
-    }));
-
-    document.getElementById('lastUpdate').textContent =
-      'آخر تحديث: ' + new Date().toLocaleTimeString('ar-LY');
-
-    setStatus('green', `✅ تم جلب ${tenders.length} عطاء وتصنيفهم تلقائياً`);
-    updateStats();
-    renderCatTabs();
-    render();
-    setProgress(100);
-    setTimeout(() => hideProgress(), 800);
-
-  } catch (e) {
-    setStatus('', 'خطأ في الجلب');
-    if (e.message.includes('fetch') || e.message.includes('Failed')) {
-      showErr('❌ تعذّر الاتصال بالخادم المحلي.\n\nتأكد أن:\n1. ملف tenders_server.py يعمل (python3 tenders_server.py)\n2. المتصفح مفتوح على http://127.0.0.1:7845');
-    } else {
-      showErr('خطأ: ' + e.message);
-    }
-    hideProgress();
-  } finally {
-    btn.disabled = false;
-  }
-}
-
-// ── Match ──
-function match(t) {
-  if (!kws.length) return { ok: false, hits: [] };
-  const txt = [t.title, t.description, t.category, t.entity, t.autoCategory].join(' ').toLowerCase();
-  const hits = kws.filter(k => txt.includes(k.toLowerCase()));
-  return { ok: hits.length > 0, hits };
-}
-
-function hl(text, hits) {
-  if (!text) return '';
-  let r = text;
-  hits.forEach(k => {
-    r = r.replace(new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi'), `<span class="hl">${k}</span>`);
-  });
-  return r;
-}
-
-// ── Category Tabs ──
-function renderCatTabs() {
-  const counts = {};
-  tenders.forEach(t => {
-    counts[t.autoCategory] = (counts[t.autoCategory] || 0) + 1;
-  });
-
-  const techCount = counts['تقنية'] || 0;
-  let html = `<div class="cat-tab ${activeCat==='الكل'?'active':''}" data-cat="الكل" onclick="setCat('الكل')">
-    📋 الكل <span class="cat-count">${tenders.length}</span>
-  </div>`;
-
-  // تقنية أولاً دائماً
-  if (techCount > 0) {
-    html += `<div class="cat-tab ${activeCat==='تقنية'?'active':''}" data-cat="تقنية" onclick="setCat('تقنية')">
-      💻 تقنية <span class="cat-count">${techCount}</span>
-    </div>`;
-  }
-
-  // باقي الفئات بترتيب الأكثر عطاءات
-  const otherCats = Object.entries(counts)
-    .filter(([k]) => k !== 'تقنية' && k !== 'غير مصنف')
-    .sort((a, b) => b[1] - a[1]);
-
-  for (const [cat, cnt] of otherCats) {
-    const catDef = CATS.find(c => c.key === cat);
-    const icon = catDef ? catDef.icon : '📁';
-    html += `<div class="cat-tab ${activeCat===cat?'active':''}" data-cat="${cat}" onclick="setCat('${cat}')">
-      ${icon} ${cat} <span class="cat-count">${cnt}</span>
-    </div>`;
-  }
-
-  if (counts['غير مصنف']) {
-    html += `<div class="cat-tab ${activeCat==='غير مصنف'?'active':''}" data-cat="غير مصنف" onclick="setCat('غير مصنف')">
-      📋 غير مصنف <span class="cat-count">${counts['غير مصنف']}</span>
-    </div>`;
-  }
-
-  document.getElementById('catTabs').innerHTML = html;
-}
-
-function setCat(cat) {
-  activeCat = cat;
-  renderCatTabs();
-  render();
-}
-
-// ── Render ──
-function render() {
-  const filt = document.getElementById('filt').value;
-  const sort = document.getElementById('sort').value;
-  const grid = document.getElementById('grid');
-
-  if (!tenders.length) {
-    grid.innerHTML = `<div class="empty"><div class="ico">📭</div><h3>لا توجد عطاءات</h3><p>اضغط "جلب العطاءات"</p></div>`;
-    return;
-  }
-
-  let list = tenders.map(t => ({ ...t, m: match(t) }));
-
-  // فلتر الفئة
-  if (activeCat !== 'الكل') list = list.filter(t => t.autoCategory === activeCat);
-
-  // فلتر الحالة / التطابق
-  if (filt === 'match') list = list.filter(t => t.m.ok);
-  if (filt === 'open')  list = list.filter(t => isOpen(t));
-
-  // ترتيب
-  if (sort === 'match') {
-    list.sort((a, b) => {
-      const diff = b.m.hits.length - a.m.hits.length;
-      if (diff !== 0) return diff;
-      // التقنية في المقدمة إذا تساويا
-      if (a.autoCategory === 'تقنية' && b.autoCategory !== 'تقنية') return -1;
-      if (b.autoCategory === 'تقنية' && a.autoCategory !== 'تقنية') return 1;
-      return 0;
-    });
-  }
-  if (sort === 'date') list.sort((a,b) => (b.publishDate||'').localeCompare(a.publishDate||''));
-  if (sort === 'alpha') list.sort((a,b) => (a.title||'').localeCompare(b.title||'', 'ar'));
-
-  const secTitle = document.getElementById('secTitle');
-  secTitle.textContent = activeCat === 'الكل'
-    ? `نتائج العطاءات (${list.length})`
-    : `${activeCat} — ${list.length} عطاء`;
-
-  if (!list.length) {
-    grid.innerHTML = `<div class="empty"><div class="ico">🔎</div><h3>لا توجد نتائج</h3><p>غيّر الفئة أو الفلتر</p></div>`;
-    return;
-  }
-
-  const catDef = c => CATS.find(x => x.key === c);
-
-  grid.innerHTML = list.map(t => {
-    const open  = isOpen(t);
-    const hits  = t.m.hits;
-    const isTech = t.autoCategory === 'تقنية';
-    const def   = catDef(t.autoCategory);
-    const icon  = def ? def.icon : '📋';
-
-    return `
-    <div class="card ${t.m.ok ? 'hit' : ''} ${isTech ? 'tech' : ''}">
-      <div class="card-top">
-        <div class="card-title">${hl(t.title || 'بدون عنوان', hits)}</div>
-        <div class="tags">
-          ${isTech ? `<span class="tag tech-tag">💻 تقنية</span>` : ''}
-          ${t.m.ok && hits.length ? `<span class="tag m">✓ ${hits.length} تطابق</span>` : ''}
-          <span class="tag ${open ? 'o' : 'c'}">${t.status || (open ? 'مفتوح' : '—')}</span>
-          ${t.autoCategory && t.autoCategory !== 'تقنية' ? `<span class="tag cat">${icon} ${t.autoCategory}</span>` : ''}
-        </div>
+  <div class="results-grid" id="grid">
+    <div class="empty-state">
+      <div class="empty-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
-      ${t.entity ? `<div style="font-size:12px;color:var(--blue);margin-bottom:4px">🏛 ${hl(t.entity, hits)}</div>` : ''}
-      ${t.description ? `<div class="card-desc">${hl(t.description, hits)}</div>` : ''}
-      <div class="card-meta">
-        ${t.biddingNumber ? `<span>🔢 ${t.biddingNumber}</span>` : ''}
-        ${t.publishDate ? `<span>📅 نُشر: ${t.publishDate}</span>` : ''}
-        ${t.deadline ? `<span>⏰ ينتهي: ${t.deadline}</span>` : ''}
-        ${t.location ? `<span>📍 ${t.location}</span>` : ''}
-        ${t.documentPrice ? `<span>💰 ${t.documentPrice} د.ل</span>` : ''}
-      </div>
-      ${t.url ? `<a class="link-btn" href="${t.url}" target="_blank">فتح العطاء على الموقع الرسمي ↗</a>` : ''}
-    </div>`;
-  }).join('');
-}
+      <h3>في انتظار الجلب</h3>
+      <p>أضف كلماتك المفتاحية واضغط جلب العطاءات</p>
+    </div>
+  </div>
 
-function isOpen(t) {
-  if (!t.deadline) return true;
-  const d = new Date(t.deadline);
-  if (isNaN(d)) return true;
-  return d >= new Date();
-}
+</main>
 
-// ── Stats ──
-function updateStats() {
-  const techCount = tenders.filter(t => t.autoCategory === 'تقنية').length;
-  document.getElementById('sTotal').textContent = tenders.length;
-  document.getElementById('sMatch').textContent = tenders.filter(t => match(t).ok).length;
-  document.getElementById('sTech').textContent  = techCount;
-  document.getElementById('sOpen').textContent  = tenders.filter(t => isOpen(t)).length;
-}
-
-// ── Helpers ──
-function clear_() {
-  tenders = []; activeCat = 'الكل';
-  document.getElementById('catTabs').innerHTML = '';
-  render();
-  ['sTotal','sMatch','sTech','sOpen'].forEach(id => document.getElementById(id).textContent = '—');
-  setStatus('', 'تم المسح');
-}
-
-function setStatus(type, msg) {
-  document.getElementById('dot').className = 'dot ' + (type || '');
-  document.getElementById('statusTxt').textContent = msg;
-}
-function setProgress(pct) {
-  document.getElementById('prog').style.display = 'block';
-  document.getElementById('progFill').style.width = pct + '%';
-}
-function hideProgress() { document.getElementById('prog').style.display = 'none'; }
-function hide(id)  { document.getElementById(id).style.display = 'none'; }
-function showErr(msg) { const el = document.getElementById('errBox'); el.style.display = 'block'; el.textContent = msg; }
-
-// ── Init ──
-renderChips();
-</script>
+<script src="app.js"></script>
 </body>
 </html>
