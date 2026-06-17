@@ -911,7 +911,20 @@ select:focus {
   width: 100%;
 }
 
-.app-footer strong {
+.app-footer strong a {
   color: var(--text-secondary);
   font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s var(--ease);
+}
+
+.app-footer strong a:hover {
+  color: var(--accent);
+}
+
+.footer-warning {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0.8;
+  margin-top: 6px;
 }
