@@ -209,28 +209,102 @@ function rmKw(i) {
 }
 
 
-// ── Fetch Tenders ─────────────────────────────────────
+// ── Fetch Tenders (Serverless for GitHub Pages) ─────────
+function formatTender(item) {
+  const state = item.biddingState || {};
+  const entity = item.governmentalEntity || {};
+  const baladya = item.baladya || {};
+  const b_type = item.biddingType || {};
+
+  const deadlineStr = (item.toDate || "").substring(0, 10);
+  let is_open = true;
+  if (deadlineStr) {
+    const d = new Date(deadlineStr);
+    // Consider the entire day of the deadline as open
+    d.setHours(23, 59, 59, 999);
+    if (!isNaN(d) && d < new Date()) {
+      is_open = false;
+    }
+  }
+
+  let state_name = state.name || "";
+  if (!is_open && (state_name === "" || state_name === "مفتوح")) {
+    state_name = "مغلق";
+  } else if (!state_name) {
+    state_name = "مفتوح";
+  }
+
+  return {
+    id: item.id || "",
+    biddingNumber: item.biddingNumber || "",
+    title: item.title || "",
+    description: item.description || "",
+    entity: entity.name || "",
+    category: b_type.name || "",
+    status: state_name,
+    publishDate: (item.publishDate || item.fromDate || "").substring(0, 10),
+    deadline: deadlineStr,
+    location: baladya.name || "",
+    documentPrice: item.documentPrice,
+    url: `https://www.attaat.pm.gov.ly/atta/${item.id || ''}`
+  };
+}
+
+async function fetchOfficialAPI(pageNumber) {
+  const res = await fetch("https://www.attaat.pm.gov.ly/back_api/api/PublicAttaat", {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      pageSize: 50,
+      sortBy: "id",
+      sortOrder: "asc",
+      pageNumber: pageNumber
+    })
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return await res.json();
+}
+
 async function fetchTenders() {
   const btn = document.getElementById('fetchBtn');
   btn.disabled = true;
-  setStatus('orange', 'جارٍ جلب العطاءات...');
-  setProgress(15);
+  setStatus('orange', 'جارٍ جلب العطاءات من الخادم الرسمي...');
+  setProgress(10);
   hideError();
 
   try {
-    setProgress(35);
-    const res = await fetch('http://127.0.0.1:7845/api/tenders');
-    setProgress(75);
+    let allTenders = [];
+    
+    // Fetch first page to get total count
+    const firstPage = await fetchOfficialAPI(0);
+    const total = firstPage.count || 0;
+    allTenders = allTenders.concat(firstPage.list || []);
+    setProgress(30);
 
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    setProgress(92);
-
-    if (data.error && (!data.tenders || data.tenders.length === 0)) {
-      throw new Error(data.error);
+    // Fetch remaining pages in parallel
+    const pageSize = 50;
+    const totalPages = Math.ceil(total / pageSize);
+    const maxPages = Math.min(totalPages, 20); // Cap at 20 pages
+    
+    if (maxPages > 1) {
+      const promises = [];
+      for (let page = 1; page < maxPages; page++) {
+        promises.push(fetchOfficialAPI(page));
+      }
+      
+      const results = await Promise.all(promises);
+      for (const pageData of results) {
+        if (pageData && pageData.list) {
+          allTenders = allTenders.concat(pageData.list);
+        }
+      }
+      setProgress(80);
     }
 
-    tenders = (data.tenders || []).map(t => ({
+    tenders = allTenders.map(formatTender).map(t => ({
       ...t,
       autoCategory: classifyTender(t)
     }));
@@ -247,11 +321,7 @@ async function fetchTenders() {
 
   } catch (e) {
     setStatus('', 'خطأ في الجلب');
-    if (e.message.includes('fetch') || e.message.includes('Failed')) {
-      showError('تعذّر الاتصال بالخادم المحلي.\n\nتأكد أن:\n1. ملف tenders_server.py يعمل (python3 tenders_server.py)\n2. المتصفح مفتوح على http://127.0.0.1:7845');
-    } else {
-      showError('خطأ: ' + e.message);
-    }
+    showError('تعذّر الاتصال بالخادم الرسمي للمشتريات.\n\nخطأ: ' + e.message);
     hideProgress();
   } finally {
     btn.disabled = false;
@@ -479,8 +549,10 @@ function render() {
 }
 
 function isOpen(t) {
+  if (t.status === "مغلق" || t.status === "مقفل" || t.status === "منتهي") return false;
   if (!t.deadline) return true;
   const d = new Date(t.deadline);
+  d.setHours(23, 59, 59, 999);
   if (isNaN(d)) return true;
   return d >= new Date();
 }
