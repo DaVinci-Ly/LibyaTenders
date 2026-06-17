@@ -895,3 +895,18 @@ select:focus {
   border-color: var(--border-hover);
   transform: none;
 }
+
+/* ── Footer ────────────────────────────────────────── */
+.app-footer {
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 40px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.app-footer strong {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
