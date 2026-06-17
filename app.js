@@ -160,7 +160,7 @@ const CATS = [
 
 
 // ── State ─────────────────────────────────────────────
-let kws = JSON.parse(localStorage.getItem('tKws') || '["صرف صحي","مياه","حفر"]');
+let kws = JSON.parse(localStorage.getItem('tKws') || '[]');
 let tenders = [];
 let activeCat = 'الكل';
 
