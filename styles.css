@@ -979,6 +979,23 @@ select:focus {
   font-size: 15.5px;
   line-height: 1.25;
   letter-spacing: 0.2px;
+  position: relative;
+  display: inline-block;
+}
+
+.verified-badge {
+  display: inline-block;
+  vertical-align: middle;
+  margin-inline-start: 4px;
+  flex-shrink: 0;
+}
+
+.footer-brand-name .verified-badge {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  inset-inline-end: -20px;
+  margin: 0;
 }
 
 .app-footer strong a {
