@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="متتبع العطاءات الحكومية الليبية — مقدّمة من ديوان البيانات الليبي">
+  <meta name="copyright" content="© Ben Zahia Holding — ديوان البيانات الليبي. جميع الحقوق محفوظة.">
+  <meta name="robots" content="index, follow, noarchive">
   <title>متتبع العطاءات الحكومية — ديوان البيانات الليبي</title>
   <link rel="icon" href="assets/diwan-favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
@@ -21,7 +23,7 @@
     </div>
   </div>
   <div class="header-actions">
-    <div class="badge" id="lastUpdate">بانتظار التحديث</div>
+    <div class="badge" id="lastUpdate">بانتظار الجلب</div>
     <button class="theme-toggle" id="themeToggle" aria-label="تبديل المظهر" onclick="toggleTheme()">
       <!-- Icon will be injected by JS -->
     </button>
@@ -30,98 +32,91 @@
 
 <main class="container">
 
-  <!-- Keywords Panel -->
-  <section class="panel" aria-label="الكلمات المفتاحية">
-    <h2 class="panel-title">الكلمات المفتاحية</h2>
-    <div class="chips" id="chips"></div>
-    <div class="input-row">
-      <input type="text" id="kwIn" placeholder="مثال: شبكة، برمجيات، طرق، كهرباء..." aria-label="إضافة كلمة مفتاحية">
-      <button onclick="addKw()">إضافة</button>
+  <!-- Interests -->
+  <section class="panel interests" aria-label="اهتماماتي">
+    <div class="interests-head">
+      <h2 class="panel-title">اهتماماتي</h2>
+      <span class="panel-hint">العطاءات التي تحتوي هذه الكلمات تُميَّز وتظهر أولاً</span>
+      <button type="button" class="fetch-btn" id="refreshBtn" onclick="fetchTenders()">جلب العطاءات</button>
     </div>
-    <div class="action-row">
-      <div class="btn-group">
-        <button id="fetchBtn" onclick="fetchTenders()">جلب العطاءات</button>
-        <button class="btn-secondary" onclick="clearAll()">مسح الكل</button>
-      </div>
-      <!-- Status -->
-      <div class="status-bar" role="status" aria-live="polite">
-        <span class="status-dot" id="dot"></span>
-        <span id="statusTxt">أدخل كلماتك المفتاحية ثم اضغط "جلب العطاءات"</span>
+    <div class="kw-row">
+      <div class="chips" id="chips"></div>
+      <div class="kw-add">
+        <input type="text" id="kwIn" placeholder="أضف كلمة… مثل: شبكة، صيانة" aria-label="إضافة كلمة مفتاحية">
+        <button type="button" class="kw-add-btn" onclick="addKw()" aria-label="إضافة">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
       </div>
     </div>
-    <div class="progress" id="prog"><div class="progress-fill" id="progFill"></div></div>
   </section>
 
   <!-- Error -->
   <div class="error-box" id="errBox" role="alert"></div>
 
-  <!-- Stats -->
-  <div class="stats-grid">
-    <div class="stat-card">
-      <span class="stat-value" id="sTotal">—</span>
-      <span class="stat-label">إجمالي العطاءات</span>
+  <!-- Filters -->
+  <div class="toolbar" id="toolbar" hidden>
+    <div class="segmented" id="filt" role="group" aria-label="عرض">
+      <button type="button" data-filt="all" class="active" aria-pressed="true" onclick="setFilt('all')">الكل <span class="seg-count">—</span></button>
+      <button type="button" data-filt="match" aria-pressed="false" onclick="setFilt('match')">المطابقة <span class="seg-count">—</span></button>
+      <button type="button" data-filt="soon" aria-pressed="false" onclick="setFilt('soon')">تنتهي قريباً <span class="seg-count">—</span></button>
     </div>
-    <div class="stat-card">
-      <span class="stat-value green" id="sMatch">—</span>
-      <span class="stat-label">تطابق مع اهتماماتك</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-value blue" id="sTech">—</span>
-      <span class="stat-label">عطاءات تقنية</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-value" id="sOpen">—</span>
-      <span class="stat-label">مفتوحة حالياً</span>
-    </div>
+    <select id="sort" onchange="render()" aria-label="ترتيب النتائج">
+      <option value="match">الأكثر تطابقاً</option>
+      <option value="deadline">الأقرب انتهاءً</option>
+      <option value="date">الأحدث نشراً</option>
+      <option value="alpha">أبجدي</option>
+    </select>
   </div>
 
   <!-- Category Tabs -->
   <nav class="category-tabs" id="catTabs" aria-label="تصنيفات العطاءات"></nav>
 
-  <!-- Results Header & Filters -->
-  <div class="results-header">
-    <div class="section-title" id="secTitle">نتائج العطاءات</div>
-    <div class="filters-bar">
-      <label for="filt">عرض:</label>
-      <select id="filt" onchange="render()">
-        <option value="all">جميع العطاءات</option>
-        <option value="match">المطابقة فقط</option>
-        <option value="open">المفتوحة فقط</option>
-      </select>
-      <select id="sort" onchange="render()" aria-label="ترتيب النتائج">
-        <option value="match">الأكثر تطابقاً</option>
-        <option value="date">الأحدث أولاً</option>
-        <option value="alpha">أبجدي</option>
-      </select>
-    </div>
-  </div>
+  <div class="progress" id="prog"><div class="progress-fill" id="progFill"></div></div>
+
+  <!-- Results -->
+  <div class="results-count" id="secTitle" aria-live="polite"></div>
   <div class="results-grid" id="grid">
     <div class="empty-state">
       <div class="empty-icon">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
       </div>
-      <h3>في انتظار الجلب</h3>
-      <p>أضف كلماتك المفتاحية واضغط جلب العطاءات</p>
+      <h3>لم يتم جلب العطاءات بعد</h3>
+      <p>اضغط "جلب العطاءات" لعرض أحدث العطاءات من الجهات الحكومية الرسمية</p>
     </div>
   </div>
 
 </main>
 
+<!-- Tender Details -->
+<dialog class="details-modal" id="details" aria-labelledby="dmTitle"></dialog>
+
   <footer class="app-footer">
-    <div class="footer-brand">
-      <div class="footer-brand-row">
-        <a href="https://yosef.ly" target="_blank" rel="noopener noreferrer" class="footer-logo-link" title="ديوان البيانات الليبي">
-          <img src="assets/diwan-symbol-dark.svg" alt="ديوان البيانات" id="footerLogo" class="footer-logo-img">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <a href="https://yosef.ly" target="_blank" rel="noopener noreferrer" class="footer-brand" title="ديوان البيانات الليبي">
+          <img src="assets/diwan-symbol-dark.svg" alt="" id="footerLogo" class="footer-logo-img">
+          <span class="footer-brand-text">
+            <strong class="footer-brand-name">ديوان البيانات الليبي <svg class="verified-badge" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-label="موثق" title="موثق"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.16-.43.25-.89.25-1.37 0-2.15-1.74-3.89-3.89-3.89-.48 0-.94.09-1.37.25C14.38 2.34 13.14 1.46 11.71 1.46c-1.43 0-2.67.88-3.34 2.19-.43-.16-.89-.25-1.37-.25-2.15 0-3.89 1.74-3.89 3.89 0 .48.09.94.25 1.37C2.05 9.33 1.17 10.57 1.17 12c0 1.43.88 2.67 2.19 3.34-.16.43-.25.89-.25 1.37 0 2.15 1.74 3.89 3.89 3.89.48 0 .94-.09 1.37-.25.67 1.31 1.91 2.19 3.34 2.19 1.43 0 2.67-.88 3.34-2.19.43.16.89.25 1.37.25 2.15 0 3.89-1.74 3.89-3.89 0-.48-.09-.94-.25-1.37 1.31-.67 2.19-1.91 2.19-3.34z" fill="#1D9BF0"/><path d="M9.5 12l2 2 4.5-4.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></strong>
+            <span class="footer-sub-text">لتقنية المعلومات والاتصالات</span>
+          </span>
         </a>
-        <div class="footer-text-group">
-          <strong class="footer-brand-name"><a href="https://yosef.ly" target="_blank" rel="noopener noreferrer">ديوان البيانات الليبي <svg class="verified-badge" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-label="موثق" title="موثق"><path d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.16-.43.25-.89.25-1.37 0-2.15-1.74-3.89-3.89-3.89-.48 0-.94.09-1.37.25C14.38 2.34 13.14 1.46 11.71 1.46c-1.43 0-2.67.88-3.34 2.19-.43-.16-.89-.25-1.37-.25-2.15 0-3.89 1.74-3.89 3.89 0 .48.09.94.25 1.37C2.05 9.33 1.17 10.57 1.17 12c0 1.43.88 2.67 2.19 3.34-.16.43-.25.89-.25 1.37 0 2.15 1.74 3.89 3.89 3.89.48 0 .94-.09 1.37-.25.67 1.31 1.91 2.19 3.34 2.19 1.43 0 2.67-.88 3.34-2.19.43.16.89.25 1.37.25 2.15 0 3.89-1.74 3.89-3.89 0-.48-.09-.94-.25-1.37 1.31-.67 2.19-1.91 2.19-3.34z" fill="#1D9BF0"/><path d="M9.5 12l2 2 4.5-4.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></strong>
-          <span class="footer-sub-text">لتقنية المعلومات والاتصالات</span>
+        <div class="footer-source">
+          <span class="footer-label">مصدر البيانات</span>
+          <span class="footer-source-name">الجهات الحكومية الرسمية</span>
+          <span class="footer-source-note">تُعرض البيانات كما وردت دون أي تعديل</span>
         </div>
       </div>
-      <p class="footer-warning">أي استخدام غير مصرح به لهذا النظام يعرضك للمساءلة القانونية الصارمة.</p>
+      <div class="footer-bottom">
+        <span>© <span id="footerYear">2026</span> ديوان البيانات الليبي. جميع الحقوق محفوظة.</span>
+        <span class="footer-warning">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          أي استخدام غير مصرح به لهذا النظام يعرضك للمساءلة القانونية الصارمة.
+        </span>
+      </div>
     </div>
   </footer>
 
+  <script src="classifier.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

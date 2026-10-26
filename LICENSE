@@ -1,46 +1,108 @@
 PROPRIETARY LICENSE
 
-Copyright (c) 2026 بـن زاهـية القـابضـة (Ben Zahia Holding). All rights reserved.
+Copyright (c) 2026 Ben Zahia Holding (بن زاهية القابضة), operating under the brand
+"ديوان البيانات الليبي" (Libyan Data Diwan). All rights reserved.
 
-1. OWNERSHIP
-   This software, source code, user interface design, and all associated documentation files (the "Software") are the exclusive intellectual property of بـن زاهـية القـابضـة (Ben Zahia Holding).
+1. SCOPE
+   This license covers the source code in any form (readable, minified or obfuscated), the user
+   interface and visual design, the tender classification logic, category catalogue and keyword
+   lists, the documentation, and the Diwan brand assets (together, the "Software"), whether obtained
+   from this repository, from the website at https://libyatenders.yosef.ly, or from any copy of
+   either.
 
-2. RESTRICTIONS
-   You are STRICTLY PROHIBITED from doing any of the following:
+2. THIRD-PARTY MATERIAL
+   The emblem of the Government of National Unity and the tender information displayed by the
+   Software belong to their respective owners and are not claimed under this license. Their
+   appearance in the Software grants no rights in them.
 
-- Copying, reproducing, or duplicating the Software in whole or in part.
-- Modifying, adapting, translating, or creating derivative works from the Software.
-- Distributing, sublicensing, publishing, selling, or renting the Software or any parts of it.
-- Using the Software, its logic, or its design for any commercial, personal, or academic purposes without explicit, written prior permission from the copyright holder.
+3. PERMITTED USE
+   You may use the Software only by visiting the website in a web browser to view tenders for your
+   own information. No other right is granted, expressly or by implication.
 
-3. ENFORCEMENT
-   Any unauthorized use, reproduction, or distribution of this Software is strictly prohibited and will be subject to legal action under applicable copyright and intellectual property laws.
+4. RESTRICTIONS
+   Without the prior written permission of the copyright holder, you may not:
+   - Copy, reproduce, mirror or redistribute the Software, in whole or in part.
+   - Modify, translate, or create derivative or substantially similar works based on the Software,
+     its design, or its classification logic.
+   - Reverse engineer, decompile, de-obfuscate, or otherwise attempt to recover readable source code
+     from the published files.
+   - Circumvent any technical protection of the Software, including its domain restrictions.
+   - Use automated means (scrapers, bots, crawlers) to extract content from the website, or reuse
+     the Software's processed output (such as its classifications) in another product or service.
+   - Embed the website in a frame, or present it as part of another website or service.
+   - Remove or alter any copyright notice, or use the Diwan name or logos.
+   - Sell, rent, sublicense, or otherwise use the Software for any commercial purpose.
 
-4. NO WARRANTY
-   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+5. PUBLIC VISIBILITY
+   This repository being publicly viewable does not grant any license. Viewing the code does not
+   permit copying or reusing it.
 
-By interacting with, viewing, or downloading from this repository, you explicitly acknowledge and agree to these terms.
+6. ENFORCEMENT
+   Any breach automatically terminates any permission granted under this license and will be
+   pursued under the applicable copyright and intellectual property laws.
+
+7. GOVERNING LAW
+   This license is governed by the laws of the State of Libya. If the English and Arabic texts
+   differ, the Arabic text prevails.
+
+8. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+   NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+   NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+   CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+By accessing this repository or the website, you acknowledge these terms.
 
 ----------------------------------------------------------------------
 
-رخصة ملكية فكرية حصريّة (PROPRIETARY LICENSE)
+رخصة ملكية فكرية حصرية
 
-حقوق النشر (c) 2026 بـن زاهـية القـابضـة (Ben Zahia Holding). جميع الحقوق محفوظة.
+حقوق النشر (c) 2026 بن زاهية القابضة (Ben Zahia Holding)، العاملة تحت العلامة التجارية
+"ديوان البيانات الليبي". جميع الحقوق محفوظة.
 
-1. الملكية
-   تعتبر هذه البرمجيات، والشيفرة المصدرية، وتصميم واجهة المستخدم، وجميع ملفات التوثيق المرتبطة بها ("البرمجيات") ملكية فكرية حصرية لشركة بـن زاهـية القـابضـة.
+1. النطاق
+   تشمل هذه الرخصة الشيفرة المصدرية بأي صورة كانت (مقروءة أو مضغوطة أو مُعمّاة)، وتصميم واجهة
+   المستخدم والتصميم المرئي، ومنطق تصنيف العطاءات وقائمة الفئات والكلمات المفتاحية، والتوثيق، وأصول
+   العلامة التجارية لديوان البيانات الليبي (ويُشار إليها مجتمعةً بـ"البرمجيات")، سواء تم الحصول عليها من
+   هذا المستودع، أو من الموقع https://libyatenders.yosef.ly، أو من أي نسخة منهما.
 
-2. القيود
-   يُمنع منعاً باتاً ومطلقاً القيام بأي مما يلي:
-   - نسخ أو تصوير أو إعادة إنتاج البرمجيات كلياً أو جزئياً.
-   - تعديل أو اقتباس أو ترجمة أو إنشاء أي أعمال مشتقة بناءً على هذه البرمجيات.
-   - توزيع أو ترخيص فرعي أو نشر أو بيع أو تأجير البرمجيات أو أي أجزاء منها.
-   - استخدام البرمجيات أو منطقها البرمجي أو تصميمها لأي أغراض تجارية أو شخصية أو تعليمية دون الحصول على إذن كتابي صريح ومسبق من صاحب حقوق النشر.
+2. المواد المملوكة للغير
+   شعار حكومة الوحدة الوطنية وبيانات العطاءات المعروضة في البرمجيات مملوكة لأصحابها، ولا تدّعي هذه
+   الرخصة ملكيتها، ولا يمنح ظهورها في البرمجيات أي حق فيها.
 
-3. المساءلة القانونية
-   أي استخدام أو إعادة إنتاج أو توزيع غير مصرح به لهذه البرمجيات هو محظور تماماً، وسيعرض مرتكبه للمساءلة والملاحقة القانونية الصارمة بموجب قوانين حقوق الطبع والنشر والملكية الفكرية المعمول بها.
+3. الاستخدام المسموح
+   يُسمح باستخدام البرمجيات فقط بزيارة الموقع عبر متصفح الإنترنت للاطلاع على العطاءات لغرض شخصي.
+   ولا يُمنح أي حق آخر، صراحةً أو ضمناً.
 
-4. إخلاء المسؤولية
-   يتم توفير هذه البرمجيات "كما هي" دون أي ضمانات من أي نوع. لا يتحمل صاحب حقوق النشر بأي حال من الأحوال أي مسؤولية عن أي مطالبات أو أضرار ناشئة عن استخدام هذه البرمجيات.
+4. القيود
+   يُمنع، دون إذن كتابي مسبق من صاحب حقوق النشر، القيام بأي مما يلي:
+   - نسخ البرمجيات أو إعادة إنتاجها أو استنساخها أو إعادة توزيعها، كلياً أو جزئياً.
+   - تعديل البرمجيات أو ترجمتها، أو إنشاء أعمال مشتقة منها أو مشابهة لها جوهرياً، بما في ذلك تصميمها
+     أو منطق التصنيف فيها.
+   - الهندسة العكسية للبرمجيات، أو فك تعميتها، أو محاولة استعادة الشيفرة المصدرية المقروءة من الملفات
+     المنشورة بأي وسيلة.
+   - التحايل على أي حماية تقنية في البرمجيات، بما في ذلك قيود النطاق.
+   - استخدام وسائل آلية (أدوات الكشط أو الروبوتات أو الزواحف) لاستخراج محتوى الموقع، أو إعادة استخدام
+     مخرجات البرمجيات المعالَجة (مثل التصنيفات) في منتج أو خدمة أخرى.
+   - تضمين الموقع داخل إطار، أو عرضه كجزء من موقع أو خدمة أخرى.
+   - إزالة أي إشعار لحقوق النشر أو تعديله، أو استخدام اسم ديوان البيانات الليبي أو شعاراته.
+   - بيع البرمجيات أو تأجيرها أو ترخيصها من الباطن، أو استخدامها لأي غرض تجاري.
 
-بتفاعلك مع هذا المستودع، أو عرض، أو تنزيل أي من محتوياته، فإنك تقر صراحةً وبشكل قاطع بفهمك وموافقتك التامة على هذه الشروط.
+5. إتاحة المستودع للعموم
+   لا تمنح إتاحة هذا المستودع للاطلاع العام أي ترخيص، ولا يبيح الاطلاع على الشيفرة نسخها أو إعادة
+   استخدامها.
+
+6. المساءلة القانونية
+   أي مخالفة لهذه الرخصة تُنهي تلقائياً أي إذن ممنوح بموجبها، وتعرّض مرتكبها للملاحقة القانونية
+   بموجب قوانين حقوق المؤلف والملكية الفكرية المعمول بها.
+
+7. القانون الواجب التطبيق
+   تخضع هذه الرخصة لقوانين دولة ليبيا. وفي حال وجود اختلاف بين النصين العربي والإنجليزي، يُعتمد النص
+   العربي.
+
+8. إخلاء المسؤولية
+   تُقدَّم البرمجيات "كما هي" دون أي ضمانات من أي نوع، صريحة أو ضمنية. ولا يتحمل صاحب حقوق النشر
+   بأي حال أي مسؤولية عن أي مطالبات أو أضرار ناشئة عن استخدام البرمجيات أو المرتبطة بها.
+
+بدخولك إلى هذا المستودع أو إلى الموقع، فإنك تقر بهذه الشروط.

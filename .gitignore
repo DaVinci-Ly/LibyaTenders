@@ -28,3 +28,7 @@ ENV/
 .metadata
 .DS_Store
 .DS_Store
+
+# Readable source and build tooling — only the protected build at the root is published
+src/
+node_modules/
