@@ -135,10 +135,13 @@ header {
 }
 
 .logo span {
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 500;
   color: var(--text-muted);
   display: block;
   margin-top: 1px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .badge {
@@ -771,6 +774,11 @@ select:focus {
 
   .logo h1 {
     font-size: 13px;
+  }
+
+  .logo span {
+    font-size: 8.5px;
+    letter-spacing: 0.03em;
   }
 
   .logo-icon {
