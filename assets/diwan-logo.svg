@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 170">
+  <g transform="translate(24,25)"><path d="M15,105 L15,64 A45,45 0 0 1 105,64 L105,105 L88,105 L88,64 A28,28 0 0 0 32,64 L32,105 Z" fill="#07252B"></path><path d="M54.2,36.6 L50.6,20 A45,45 0 0 1 69.4,20 L65.8,36.6 Z" fill="#34C7A9"></path></g>
+  <line x1="176" y1="34" x2="176" y2="136" stroke="#07252B" stroke-opacity="0.18" stroke-width="2"></line>
+  <text x="596" y="86" text-anchor="end" font-family="Cairo, &#39;Segoe UI&#39;, Tahoma, sans-serif" font-weight="600" font-size="46" fill="#07252B">ديوان التقنية الليبي</text>
+  <text x="596" y="120" text-anchor="end" font-family="Cairo, Arial, sans-serif" font-weight="400" font-size="16" letter-spacing="3.5" fill="#5E7374">LIBYAN TECHNOLOGY DIWAN</text>
+</svg>

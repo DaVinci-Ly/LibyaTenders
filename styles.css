@@ -1,56 +1,59 @@
 /* ─────────────────────────────────────────────────────
-   styles.css — متتبع العطاءات الحكومية الليبية
-   نظام التصميم | Design System
+   styles.css — منصة العطاءات الحكومية الليبية
+   ديوان البيانات الليبي | Design System
    ───────────────────────────────────────────────────── */
 
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap');
 
 /* ── Design Tokens (Dark — Default) ────────────────── */
 :root {
-  /* Backgrounds — warmer, less harsh */
-  --bg-deep: #0C1220;
-  --bg-base: #131C2E;
-  --bg-surface: #1C2640;
-  --bg-elevated: #2A3553;
-  --header-bg: rgba(19, 28, 46, 0.88);
+  /* Backgrounds — deep neutral ink, easy on the eye */
+  --bg-deep: #0D1014;
+  --bg-base: #14181E;
+  --bg-surface: #1C2129;
+  --bg-elevated: #252B34;
+  --header-bg: rgba(13, 16, 20, 0.94);
 
-  /* Accent — slightly dimmer gold */
+  /* Accent — derived from government logo gold #BD8D44 */
   --accent: #D4950C;
   --accent-hover: #B8820A;
   --accent-soft: rgba(212, 149, 12, 0.08);
   --accent-border: rgba(212, 149, 12, 0.20);
 
-  /* Text — softer, less glaring */
-  --text: #CDD5E0;
-  --text-secondary: #8892A4;
-  --text-muted: #5C6478;
+  /* Diwan teal — used only as a subtle identity ring */
+  --diwan: #2EB89A;
 
-  /* Semantic Colors — muted tones */
-  --green: #34D399;
-  --green-soft: rgba(52, 211, 153, 0.07);
-  --green-border: rgba(52, 211, 153, 0.18);
+  /* Text */
+  --text: #E2E6EC;
+  --text-secondary: #8B93A0;
+  --text-muted: #4C5260;
 
-  --red: #F87171;
-  --red-soft: rgba(248, 113, 113, 0.07);
-  --red-border: rgba(248, 113, 113, 0.18);
+  /* Semantic Colors */
+  --green: #3FB950;
+  --green-soft: rgba(63, 185, 80, 0.07);
+  --green-border: rgba(63, 185, 80, 0.18);
 
-  --blue: #60A5FA;
-  --blue-soft: rgba(96, 165, 250, 0.07);
-  --blue-border: rgba(96, 165, 250, 0.18);
+  --red: #F85149;
+  --red-soft: rgba(248, 81, 73, 0.07);
+  --red-border: rgba(248, 81, 73, 0.18);
 
-  --purple: #C4B5FD;
-  --purple-soft: rgba(196, 181, 253, 0.07);
-  --purple-border: rgba(196, 181, 253, 0.18);
+  --blue: #58A6FF;
+  --blue-soft: rgba(88, 166, 255, 0.07);
+  --blue-border: rgba(88, 166, 255, 0.18);
 
-  --cyan: #67E8F9;
-  --yellow: #FCD34D;
-  --orange: #FB923C;
-  --teal: #5EEAD4;
-  --pink: #F9A8D4;
+  --purple: #BC8CFF;
+  --purple-soft: rgba(188, 140, 255, 0.07);
+  --purple-border: rgba(188, 140, 255, 0.18);
+
+  --cyan: #39D5C3;
+  --yellow: #E3B341;
+  --orange: #F0883E;
+  --teal: #2EB89A;
+  --pink: #F778BA;
 
   /* Borders */
-  --border: rgba(148, 163, 184, 0.08);
-  --border-hover: rgba(148, 163, 184, 0.15);
+  --border: rgba(226, 230, 236, 0.07);
+  --border-hover: rgba(226, 230, 236, 0.13);
 
   /* Radius */
   --radius-sm: 6px;
@@ -59,10 +62,10 @@
   --radius-pill: 9999px;
 
   /* Effects */
-  --shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --btn-text: #000;
-  --link-btn-text: #000;
+  --btn-text: #0D1014;
+  --link-btn-text: #0D1014;
 }
 
 
@@ -809,65 +812,80 @@ select:focus {
 
 /* ── Light Theme ───────────────────────────────────── */
 [data-theme="light"] {
-  --bg-deep: #F0F2F5;
+  --bg-deep: #F5F5F5;
   --bg-base: #FFFFFF;
-  --bg-surface: #F7F8FA;
-  --bg-elevated: #E8ECF1;
-  --header-bg: rgba(255, 255, 255, 0.88);
+  --bg-surface: #F0F0F0;
+  --bg-elevated: #E4E4E4;
+  --header-bg: rgba(255, 255, 255, 0.94);
 
+  /* Deeper amber to keep contrast on white */
   --accent: #B8860B;
   --accent-hover: #9A7209;
   --accent-soft: rgba(184, 134, 11, 0.07);
   --accent-border: rgba(184, 134, 11, 0.18);
 
-  --text: #1E293B;
-  --text-secondary: #475569;
-  --text-muted: #64748B;
+  --text: #1A1D21;
+  --text-secondary: #4A5060;
+  --text-muted: #8A919E;
 
-  --green: #16A34A;
-  --green-soft: rgba(22, 163, 74, 0.06);
-  --green-border: rgba(22, 163, 74, 0.15);
+  --green: #1A7F37;
+  --green-soft: rgba(26, 127, 55, 0.06);
+  --green-border: rgba(26, 127, 55, 0.15);
 
-  --red: #DC2626;
-  --red-soft: rgba(220, 38, 38, 0.05);
-  --red-border: rgba(220, 38, 38, 0.12);
+  --red: #CF222E;
+  --red-soft: rgba(207, 34, 46, 0.05);
+  --red-border: rgba(207, 34, 46, 0.12);
 
-  --blue: #2563EB;
-  --blue-soft: rgba(37, 99, 235, 0.05);
-  --blue-border: rgba(37, 99, 235, 0.12);
+  --blue: #0969DA;
+  --blue-soft: rgba(9, 105, 218, 0.05);
+  --blue-border: rgba(9, 105, 218, 0.12);
 
-  --purple: #7C3AED;
-  --purple-soft: rgba(124, 58, 237, 0.05);
-  --purple-border: rgba(124, 58, 237, 0.12);
+  --purple: #6639BA;
+  --purple-soft: rgba(102, 57, 186, 0.05);
+  --purple-border: rgba(102, 57, 186, 0.12);
 
-  --cyan: #0891B2;
-  --yellow: #CA8A04;
-  --orange: #EA580C;
-  --teal: #0D9488;
-  --pink: #DB2777;
+  --cyan: #1692B4;
+  --yellow: #9A6700;
+  --orange: #BC4C00;
+  --teal: #1A9177;
+  --pink: #BF3989;
 
-  --border: rgba(15, 23, 42, 0.07);
-  --border-hover: rgba(15, 23, 42, 0.13);
+  --border: rgba(26, 29, 33, 0.08);
+  --border-hover: rgba(26, 29, 33, 0.15);
 
-  --shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  --btn-text: #FFF;
-  --link-btn-text: #FFF;
+  --shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  --btn-text: #FFFFFF;
+  --link-btn-text: #FFFFFF;
+}
+
+/* Logo: the government SVG is golden (#BD8D44) — visible as-is in both modes */
+
+[data-theme="light"] .logo-icon {
+  box-shadow: none;
 }
 
 [data-theme="light"] .status-dot.green {
-  box-shadow: 0 0 4px rgba(22, 163, 74, 0.25);
+  box-shadow: 0 0 4px rgba(26, 127, 55, 0.25);
 }
 
 [data-theme="light"] .status-dot.orange {
-  box-shadow: 0 0 4px rgba(184, 134, 11, 0.25);
+  box-shadow: 0 0 4px rgba(154, 110, 31, 0.30);
 }
 
 [data-theme="light"] .chip:hover {
-  background: rgba(184, 134, 11, 0.12);
+  background: rgba(154, 110, 31, 0.10);
 }
 
 [data-theme="light"] select {
   background: var(--bg-surface);
+}
+
+[data-theme="light"] .app-footer strong a {
+  color: #1A6B5A;
+}
+
+[data-theme="light"] .app-footer strong a:hover {
+  color: #0F4A3D;
 }
 
 
@@ -902,17 +920,69 @@ select:focus {
 
 /* ── Footer ────────────────────────────────────────── */
 .app-footer {
-  text-align: center;
-  padding: 30px 20px;
+  padding: 24px 20px;
   margin-top: auto;
   border-top: 1px solid var(--border);
   font-size: 13px;
   color: var(--text-muted);
   width: 100%;
+  text-align: center;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.footer-brand-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.footer-logo-img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  opacity: 1;
+  display: block;
+  transition: transform 0.2s var(--ease);
+}
+
+.footer-logo-link:hover .footer-logo-img {
+  transform: scale(1.08);
+}
+
+.footer-text-group {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-brand-name {
+  font-size: 15.5px;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
 }
 
 .app-footer strong a {
-  color: var(--text-secondary);
+  color: var(--diwan);
   font-weight: 700;
   text-decoration: none;
   transition: color 0.2s var(--ease);
@@ -922,9 +992,55 @@ select:focus {
   color: var(--accent);
 }
 
+.footer-sub-text {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.3;
+  margin-top: 4px;
+}
+
 .footer-warning {
   font-size: 11px;
   color: var(--text-muted);
-  opacity: 0.8;
-  margin-top: 6px;
+  opacity: 0.75;
+  line-height: 1.5;
+  margin: 0;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .app-footer {
+    padding: 18px 14px 22px;
+  }
+
+  .footer-brand {
+    gap: 8px;
+  }
+
+  .footer-brand-row {
+    gap: 9px;
+  }
+
+  .footer-logo-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .footer-brand-name {
+    font-size: 14.5px;
+    letter-spacing: 0.2px;
+  }
+
+  .footer-sub-text {
+    font-size: 9.5px;
+    margin-top: 3.5px;
+  }
+
+  .footer-warning {
+    font-size: 10.5px;
+    line-height: 1.5;
+    padding: 0 8px;
+    max-width: 340px;
+    margin: 0 auto;
+  }
 }

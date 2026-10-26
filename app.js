@@ -621,6 +621,15 @@ document.getElementById('kwIn').addEventListener('keydown', e => {
 });
 
 // Theme Management
+function updateDiwanLogo(isLight) {
+  const logo = document.getElementById('footerLogo');
+  if (logo) {
+    logo.src = isLight
+      ? 'assets/diwan-symbol-light.svg'
+      : 'assets/diwan-symbol-dark.svg';
+  }
+}
+
 function initTheme() {
   const savedTheme = localStorage.getItem('theme');
   const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
@@ -628,9 +637,11 @@ function initTheme() {
   if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
     document.documentElement.setAttribute('data-theme', 'light');
     document.getElementById('themeToggle').innerHTML = ICONS.moon;
+    updateDiwanLogo(true);
   } else {
     document.documentElement.removeAttribute('data-theme');
     document.getElementById('themeToggle').innerHTML = ICONS.sun;
+    updateDiwanLogo(false);
   }
 }
 
@@ -640,10 +651,12 @@ function toggleTheme() {
     document.documentElement.removeAttribute('data-theme');
     localStorage.setItem('theme', 'dark');
     document.getElementById('themeToggle').innerHTML = ICONS.sun;
+    updateDiwanLogo(false);
   } else {
     document.documentElement.setAttribute('data-theme', 'light');
     localStorage.setItem('theme', 'light');
     document.getElementById('themeToggle').innerHTML = ICONS.moon;
+    updateDiwanLogo(true);
   }
 }
 
